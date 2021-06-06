@@ -1,30 +1,21 @@
+using PlayMarketUI.UserMenu;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+
+namespace PlayMarketUI.UIManager{ 
 public class UIManager : MonoBehaviour
 {
-    public ScrollRect ScrollContent;
     public GameObject GameInfoUI;
-    public float ShiftSmooth;
+    public UserMenuBehavior _userMenu;
     Animator _gameInfo;
-    Button[] _buttons;
-    Image _scrollImage;
-    private void Start()
+    private void Awake()
     {
-        _scrollImage = ScrollContent.gameObject.GetComponent<Image>();
         _gameInfo = GameInfoUI.GetComponent<Animator>();
     }
     public void OpenMenu()
     {
-        _scrollImage.raycastTarget = true;
-        ScrollContent.velocity = -Vector2.right * ShiftSmooth;
-    }
-    public void CloseMenu()
-    {
-        _scrollImage.raycastTarget = false;
-        _scrollImage.color = Color.clear;
-        ScrollContent.velocity = Vector2.right * ShiftSmooth;
-
+        _userMenu.gameObject.SetActive(true);
     }
     public void OpenGameInfo()
     {
@@ -42,4 +33,5 @@ public class UIManager : MonoBehaviour
         GameInfoUI.SetActive(false);
     }
 
+}
 }
